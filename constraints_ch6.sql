@@ -140,15 +140,55 @@ ADD COLUMN gender ENUM('M', 'F') AFTER last_name;
 INSERT INTO customers (first_name, last_name, gender, email_address, number_of_complaints)
 VALUES ('John', 'Mackinley', 'M', 'john.mckinley@365careers.com', 0);
 
+ALTER TABLE customers
+CHANGE COLUMN number_of_complaints number_of_complaints INT DEFAULT 0; 
 
+INSERT INTO customers (first_name, last_name, gender)
+VALUES ('Peter', 'Figaro', 'M');
 
+SELECT * FROM customers;
 
+ALTER TABLE customers
+ALTER COLUMN number_of_complaints DROP DEFAULT;
 
+CREATE TABLE companies
+(
+	company_id VARCHAR(255),
+    company_name VARCHAR(255) DEFAULT 'X',
+    hq_phone_number VARCHAR(255),
+PRIMARY KEY (company_id),
+UNIQUE KEY (hq_phone_number)
+);
 
+DROP TABLE companies;
 
+CREATE TABLE companies
+(
+	company_id INT AUTO_INCREMENT,
+    hq_phone_number VARCHAR(255),
+    company_name VARCHAR(255) NOT NULL,
+PRIMARY KEY (company_id)
+);
 
+ALTER TABLE companies
+MODIFY company_name VARCHAR(255) NULL;
 
+ALTER TABLE companies
+CHANGE COLUMN company_name company_name VARCHAR(255) NOT NULL;
 
+INSERT INTO companies (hq_phone_number)
+VALUES ('+1 (202) 555-0196');
+
+INSERT INTO companies (hq_phone_number, company_name)
+VALUES ('+1 (202) 555-0196', 'Company A');
+
+SELECT * FROM companies;
+
+ALTER TABLE companies
+MODIFY hq_phone_number VARCHAR(255) NULL;
+
+ALTER TABLE companies
+CHANGE COLUMN hq_phone_number hq_phone_number VARCHAR(255) NOT NULL;
 
 
 
